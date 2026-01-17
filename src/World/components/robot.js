@@ -29,7 +29,7 @@ function createRobot() {
     const arm2 = createArm();
     arm1.position.z = 0.4;
     arm1.position.y += 0.6;
-    // arm1.rotation.y = MathUtils.degToRad(90); 
+    // arm1.rotation.y = MathUtils.degToRad(90);
 
     arm2.rotation.set(0, 0, 0);
     arm2.position.x = -2;
@@ -44,7 +44,32 @@ function createRobot() {
     // body.rotation.y = MathUtils.degToRad(105);
     const radiansPerSecond = MathUtils.degToRad(30);
     let flag1, flag2, flag3 = 0;
+
+    // Mode control: 'auto' or 'manual'
+    robot.mode = 'auto';
+
+    // Expose joints for external control
+    robot.joints = {
+        body: body,
+        arm1: arm1,
+        arm2: arm2
+    };
+
+    // Manual rotation amount (degrees per click)
+    const rotationStep = MathUtils.degToRad(10);
+
+    // Method to rotate a joint manually
+    robot.rotateJoint = (jointName, direction) => {
+        const joint = robot.joints[jointName];
+        if (joint) {
+            joint.rotation.y += direction * rotationStep;
+        }
+    };
+
     robot.tick = (delta) => {
+        // Only run automatic animation if in auto mode
+        if (robot.mode !== 'auto') return;
+
         if (!flag1) {
             body.rotation.y += radiansPerSecond * delta;
             if (body.rotation.y > 6.28) flag1 = 1;

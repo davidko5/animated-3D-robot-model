@@ -17,6 +17,36 @@
   <div id="scene-container">
     <!-- Canvas will be inserted here by renderer -->
   </div>
+
+  <!-- Control Panel -->
+  <div id="control-panel">
+    <div class="control-section">
+      <label class="mode-label">Mode:</label>
+      <div class="mode-switch">
+        <button id="btn-auto" class="mode-btn active">Automatic</button>
+        <button id="btn-manual" class="mode-btn">Manual</button>
+      </div>
+    </div>
+
+    <div id="manual-controls" class="hidden">
+      <div class="control-section">
+        <label>Select Joint:</label>
+        <select id="joint-selector">
+          <option value="body">Body</option>
+          <option value="arm1">Arm 1 (Shoulder)</option>
+          <option value="arm2">Arm 2 (Elbow)</option>
+        </select>
+      </div>
+
+      <div class="control-section">
+        <label>Rotate:</label>
+        <div class="arrow-buttons">
+          <button id="btn-left" class="arrow-btn">&larr;</button>
+          <button id="btn-right" class="arrow-btn">&rarr;</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
